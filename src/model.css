@@ -1,0 +1,515 @@
+/* Variáveis CSS para facilitar a manutenção */
+:root {
+    --primary-color: #00C853; /* Azul principal */
+    --bar-progress-color: #00C853;
+    --secondary-color-hover: #F5A623; /* Laranja para destaque/ações secundárias */
+    --background-light: #F4F7F6; /* Fundo claro da aplicação */
+    --background-dark:rgb(0, 0, 0);
+    --background-blue: #007AFF; /* Fundo escuro da sidebar */
+    --text-color-dark: #333333; /* Texto principal escuro */
+    --text-color-light: #FFFFFF; /* Texto claro (para sidebar/botões) */
+    --text-color-gray: #666666; /* Texto cinza para descrições/secundário */
+    --border-color: #E0E6ED; /* Cor da borda para cards/elementos */
+    --card-background: #FFFFFF; /* Fundo dos cards */
+    --shadow-light: rgba(0, 0, 0, 0.05); /* Sombra suave */
+    --font-family: 'Roboto', sans-serif;
+    --border-radius: 8px; /* Arredondamento de bordas */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+}
+
+/* Reset Básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color-dark);
+    background-color: var(--background-light);
+    display: flex; /* Para centralizar o app-container se necessário */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--spacing-sm);
+}
+
+/* Container Principal da Aplicação */
+.app-container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px; /* Largura máxima para desktops grandes */
+    height: calc(100vh - (2 * var(--spacing-sm))); /* Altura para preencher a tela com padding */
+    min-height: 700px; /* Altura mínima para evitar quebra em telas pequenas */
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow-light);
+    overflow: hidden; /* Para garantir que o conteúdo não vaze */
+}
+
+/* Sidebar de Navegação */
+.sidebar {
+    width: 250px;
+    background-color: var(--background-dark);
+    color: var(--text-color-light);
+    padding: var(--spacing-md) var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-xs); /* Pequeno padding para alinhar com os itens de navegação */
+}
+
+.sidebar .logo img {
+    width: 100%;
+    height: 50px;
+    margin-right: var(--spacing-xs);
+    
+}
+
+.sidebar .logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+}
+
+.sidebar .main-nav ul {
+    list-style: none;
+}
+
+.sidebar .nav-item {
+    margin-bottom: var(--spacing-xs);
+}
+
+.sidebar .nav-item a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--text-color-light);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-item a:hover,
+.sidebar .nav-item.active a {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.sidebar .nav-item a i {
+    margin-right: var(--spacing-xs);
+    font-size: 1.1rem;
+}
+
+.sidebar .sidebar-footer {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .sidebar-footer a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--text-color-light);
+    text-decoration: none;
+    margin-bottom: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease;
+}
+
+.sidebar .sidebar-footer a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-light);
+    padding: var(--spacing-md);
+    overflow-y: auto; /* Para scrollar o conteúdo se for muito longo */
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-header .header-title h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color-dark);
+    display: flex;
+    align-items: center;
+}
+
+.main-header .header-title h2 i {
+    margin-right: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .user-name {
+    margin-right: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--text-color-gray);
+}
+
+.user-profile .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+/* Dashboard e Cards */
+.dashboard {
+    display: grid;
+    /* Alterado o grid: Pomodoro e Adicionar Tarefa lado a lado, Lista de Tarefas abaixo */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-areas:
+        "pomodoro add-task"
+        "tasks tasks";
+    gap: var(--spacing-md);
+}
+
+.pomodoro-card {
+    grid-area: pomodoro;
+    text-align: center;
+}
+
+.add-task-card {
+    grid-area: add-task;
+}
+
+.tasks-list-card {
+    grid-area: tasks;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 15px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color-dark);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Pomodoro Card Específico */
+.timer-display {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: var(--spacing-md) 0;
+    letter-spacing: 2px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap; /* Permite que os botões quebrem linha se a tela for pequena */
+}
+
+.pomodoro-status {
+    margin-top: var(--spacing-sm);
+    font-size: 1.1rem;
+    color: var(--text-color-gray);
+}
+
+.pomodoro-status-text {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.progress-bar-container {
+    width: 80%;
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    margin: var(--spacing-xs) auto 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Será controlado por JS */
+    background-color: var(--bar-progress-color);
+    border-radius: 5px;
+    transition: width 0.5s ease-out;
+}
+
+.pomodoro-info {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-color-gray);
+    text-align: left; /* Alinha o texto à esquerda dentro do card */
+}
+
+.pomodoro-info p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.pomodoro-info p:last-child {
+    margin-bottom: 0;
+}
+
+/* Botões */
+.btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    white-space: nowrap; /* Evita que o texto do botão quebre linha */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.btn-primary:hover {
+    background-color: #3A7CD0; /* Tom mais escuro do primary */
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #E0E6ED; /* Cinza claro */
+    color: var(--text-color-dark);
+}
+
+.btn-secondary:hover {
+    background-color: #C0C8D0;
+    transform: translateY(-1px);
+}
+
+.btn-add {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.btn-add:hover {
+    background-color: var(--secondary-color-hover); /* Tom mais escuro do secondary */
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: var(--text-color-gray);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-icon:hover {
+    color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+
+/* Adicionar Tarefa Card */
+.add-task-card .form-group {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap; /* Permite que input e botão quebrem linha */
+}
+
+.add-task-card input[type="text"] {
+    flex-grow: 1;
+    padding: var(--spacing-xs);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    outline: none;
+    transition: border-color 0.2s ease;
+    min-width: 150px; /* Garante que o input não fique muito pequeno */
+}
+
+.add-task-card input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.task-list {
+    list-style: none;
+    padding-top: var(--spacing-xs);
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: var(--spacing-sm);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color); /* Cor do checkbox quando marcado */
+}
+
+.task-item label {
+    flex-grow: 1;
+    font-size: 1.05rem;
+    color: var(--text-color-dark);
+    cursor: pointer;
+    word-break: break-word; /* Permite que o texto longo quebre linha */
+}
+
+.task-item.completed label {
+    text-decoration: line-through;
+    color: var(--text-color-gray);
+}
+
+.task-item .task-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-left: var(--spacing-sm);
+    flex-shrink: 0; /* Evita que os botões encolham */
+}
+
+/* Responsividade Básica (media queries) */
+@media (max-width: 1024px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        min-height: unset;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: var(--spacing-sm);
+        flex-wrap: wrap; /* Permite que os itens da sidebar quebrem linha */
+    }
+
+    .sidebar .logo {
+        margin-bottom: 0;
+    }
+
+    .sidebar .main-nav {
+        display: none; /* Esconde navegação principal em telas menores, pode ser um menu hambúrguer */
+    }
+
+    .sidebar .sidebar-footer {
+        display: none; /* Esconde footer em telas menores */
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        grid-template-areas:
+            "pomodoro"
+            "add-task"
+            "tasks";
+    }
+
+    .pomodoro-card,
+    .add-task-card,
+    .tasks-list-card {
+        grid-area: unset; /* Reseta as áreas do grid */
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: var(--spacing-xs);
+    }
+
+    .app-container {
+        border-radius: var(--spacing-xs);
+    }
+
+    .sidebar .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .main-header .header-title h2 {
+        font-size: 1.5rem;
+    }
+
+    .timer-display {
+        font-size: 3rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .timer-controls {
+        flex-direction: column; /* Botões do timer empilhados em telas muito pequenas */
+    }
+
+    .add-task-card .form-group {
+        flex-direction: column; /* Input e botão de adicionar empilhados */
+    }
+    .add-task-card input[type="text"] {
+        width: 100%; /* Ocupa largura total */
+    }
+    .add-task-card .btn-add {
+        width: 100%; /* Ocupa largura total */
+    }
+}
